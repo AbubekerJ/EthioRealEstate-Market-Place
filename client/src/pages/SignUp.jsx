@@ -30,7 +30,7 @@ const SignUp = () => {
           console.log(data)
           setLoading(false)
           setError(null)
-          navigate('./signIn')
+          navigate('/signIn')
       } catch (error) {
         setError(error.message)
         setLoading(false)
