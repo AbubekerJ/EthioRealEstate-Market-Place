@@ -21,19 +21,25 @@ app.use(cors({
   }));
 
 app.use(express.json())
-app.use((error,req,res,next)=>{
-    const statusCode=  error.statusCode || 500
-    const message = error.message||'internal server error'
-
-    return res.status(statusCode).json({
-        "succsuss":false,
-        "statusCode":statusCode,
-        "message":message
-    })
-})
 //routes
 app.use('/api/user',UserRouter)
 app.use('/api/auth/',authRouter)
+
+
+//error handling middleware
+//note always make error middleware uneder all code 
+app.use((error,req,res,next)=>{
+    const statusCode =  error.statusCode || 500
+    const message = error.message||'internal server error'
+
+    return res.status(statusCode).json({
+        "success":false,
+        "statusCode":statusCode,
+        "message":message
+    })})
+
+
+
 
 app.listen(3000 , ()=>{
     console.log('listning on port 3000')
