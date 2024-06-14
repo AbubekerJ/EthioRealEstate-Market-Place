@@ -30,7 +30,7 @@ app.use('/api/auth/',authRouter)
 //note always make error middleware uneder all code 
 app.use((error,req,res,next)=>{
     const statusCode =  error.statusCode || 500
-    const message = error.message||'internal server error'
+    const message = error.message||'Please Check Your Connecton'
 
     return res.status(statusCode).json({
         "success":false,

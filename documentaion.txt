@@ -1,0 +1,265 @@
+Steps made to build this web app
+
+#1 install react using vite 
+ npm create vite@latest client 
+
+#2 add tailwind css
+ ->go to tailwaind webite documentaion 
+
+#3 suggested extention
+  ->console ninja to console log in vs code
+  ->talwindcssintelliesense
+
+#4 initaialaize git start pushing 
+
+#5 now create pages folder in src folder o put all our pages in there 
+
+#6 now install  npm react-router-dom in client folder to route with in pages
+
+#7 now in App.js import BrowserRouter Routes , Route
+
+    here is the sturucture 
+
+    return </BrousereRouter>
+      <Routes>
+
+      <Route  path = '/' element={Home.js}><Route/>
+      <Route  path = '' element={}><Route/>
+
+      <Routes/>
+    
+    <BrousereRoute/>
+
+
+#8Crate Header section for all pages 
+ ->create component folder in src folder 
+ ->create header.jsx file in there
+ ->import header in app.js file and put it above all page routes 
+
+#9 start Creating backend
+
+   ###Note dont intall packages in api foder install them in root folder 
+   it is good for deployment on render
+   ->create folder name api
+   ->npm init-y(this will create our package.json) 
+  ->install express nodemon cors
+  ->crate index.js file in the api folder and import express and start server
+  ->to use import express from 'express' instead of require express fom 'express'
+    we need to cofigure add "type":"json" in pcakage.json
+   ->also congigure nodemon "dev":"nodemon api/index.js" this will make us run 
+   our sercer usig comand npm run dev
+  -> for deployment "start":"node api/index.js"
+
+
+
+#10 Connect to mongodb database and create schema
+
+##connect to mongodb
+
+-> create databse in mongodb website
+->install mongoose in the root folder npm i mongoose
+->install dotenv aswell
+
+-> after crateing use the api to connect to our app
+  import mongoose from 'mongoose'
+  import dotenv from 'dotenv'
+  dotenv.config()
+  mongoose.connect(prosess.env.MONGO_API).then(()=>{
+    console.log('conected succssfull')
+  }).catch((error)=>{
+    console.log(error)
+  })
+  #Note dont forget to put your .env file in git ignore
+
+
+  ##create schema
+
+->now crate model folder to put our model schema 
+->in model folder import mongoose from 'mongoose'
+   ##Note name it like user.model.js since we are creating user model schema 
+   -> 
+    const UserSchema = new mongoose.schema({  name:{required:true , type:string ,unique:true}, email ......})
+    
+    *Now create the model
+    const User  = mongoose.model('User(name of the model)' , userSchema(the schema we created above))
+    
+   ->then export User Us default 
+
+   now we  can use user model to create  user in other file 
+   like Const addUser  =new User({username:'', email:'',password:''})
+
+
+#11 Create Routes and controler folder for the api(good practice )3 steps 
+
+     ##create routes folder
+
+
+     crate filed like auth.routes.js to hold only auth routes 
+     
+     const router = express.Router()
+
+     router.get('/signUp' , signUp(this come from the controler folder )) 
+
+     export default router 
+
+
+
+     ##crate controler folder
+
+
+       ->auth.controler.js file
+       -> now create the controler function that we user in auth router 
+       const signUp =async (req, res)=>{
+        const {username , email , password}=req.body
+        encriptpass = bycrip.hashsync(password , 10)
+        const  newUser  =new User(username , email , password:encriptpass)
+        
+        try{
+            await newUser.save()
+            res.status(201).json({message:'crated succsusfull'})
+        }catch{}
+
+
+       } 
+
+
+     ## Now in index.js file 
+
+
+     import authRouter from'./router ' 
+
+     app.use('api/auth' ,authRouter )
+
+
+
+ #12 Create signUp page using the above mathod
+  ->package to install
+    *npn i bcryptjs to encript our password 
+
+
+
+
+#13 Error hnadling(2 types)
+
+##Create miledware function to handle possible errors
+
+ in index.js file under all code create
+ the middelware function
+ app.use((req , res ,error, next)=>{
+    const statusCode = error.statusCode ||500
+    const message  =error.message || 'internal server error' 
+    return res.status(statusCode).json({
+        succssus:false
+        statusCode,
+        message,
+    })
+ }
+ )
+
+
+ ##now we can use this middleware in our all controler function
+
+ eg in signUp function 
+
+ const signUp =async (req , res , next)=>{
+    {username , email , password}=req.body
+    const encriptsdpass = bycrip.hashsync(password , 10)
+    const newUser =new User ({username , email , password:encriptpass})
+    try{
+     await newUser.save()
+    }catch(error){next(error)}
+ }
+ 
+
+ ##Create custome error for like 
+    user not found 
+    email doesnot exists 
+
+    ->to create custome error create a folder called utils 
+
+    ->in util folder create error.js file 
+
+    -> now create custome error and export it
+     export const customeError = (statusCode , message)=>{
+      const error =new Error()
+      error.statusCode = statusCode
+      error.message = message
+
+      return error
+
+     }
+
+     ##to use our custome error in next mmiddle ware 
+     next(customeError(500 , 'usernotFound))
+
+
+#14 create signUp ui page 
+
+use useState to handle change on the from
+eg 
+[form , setForm]=useState({})
+[error , setError]=useState(null)
+[loading,setLoading]=useState(false)
+const onSunbmit=()=>{
+  setForm([{...form , [e.target.id]:e.target.value}])
+}
+const handleSubmit=async (e)=>{
+  e.preventDefault()
+  const res = await fetch('localhost/3000/api/signUp',{
+    method:'POST',
+    header:{'Content-Type':'application.json'}
+    body:JSON.stringify(form)
+  })
+
+  const data = await res.json()
+   
+}
+
+
+## if signUp successfull use usNavigate to navigate to home page 
+
+const navigate = useNavigate()
+navigate('./home')
+
+
+#15 now crate signIn backend
+
+##steps to complete
+    1,check is the user is valid using    const validUser = await user.findOne({email})
+    2if it is not  valid return error using the middleware next()
+    3 if it is valid  check if the encripted password is correct
+    by comparing with the dicripted password 
+    eg. bcryptjs.compareSync(password:validuser.passoword)
+    4 if it is correct return a coockie to the client using this stapes
+       ->install jsonwebtoken
+       ->create a token.  const token  = jwt.sign({id:validUser_id}).prosess.env.JWT_SECCRET
+       ##but we should not send the passowrd to the cient we should only send the username andm email 
+        to store in in the redux and use it when needed . so we extract the password ##
+       const {password:pass , ...rest}=validUser._doc
+       ->retunr res.coockie('access token', token , {httponly:true}).status(201).json(rest)
+
+
+
+#in controler folder in auth.controler.js file wher signup code exit create sign in controler 
+
+const signIn = asyinc (req ,res ,next)=>{
+  const {email , password} = req.body
+  try{
+   const validUser =awit User.findOne({email}) ###this willfind the user with that email and assign it to validuser
+  if (!validUser){
+    return next(404 ,'user not found')
+  }
+  const dicryptpass = bcryptjs.comparsync({password:validUser.password})
+  if (!dicryptpass){return next(401,'inalid credentials')}
+
+    const token  = jwt.sign({id:validUser._id}).prosess.env.JWT_SECRET
+    const {passowrd:pass , ...rest}=validUser._doc
+    return res coockie('access token',token , {httponly:true}).status(201).json(rest)
+
+}
+
+  }catch(error){
+     next(error)
+
+  }
+  
