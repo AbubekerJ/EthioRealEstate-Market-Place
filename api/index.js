@@ -4,10 +4,13 @@ import dotenv from 'dotenv'
 import UserRouter from './routes/user.route.js'
 import authRouter from './routes/auth.route.js'
 import cors from 'cors'
+import cookieParser from 'cookie-parser'
 dotenv.config()
 
 
 const app =express()
+app.use(express.json())
+app.use(cookieParser())
 //connect The database
 mongoose.connect(process.env.MONGODB_URI).then(()=>{
     console.log('connectted succesfully')
@@ -20,10 +23,11 @@ app.use(cors({
     origin: 'http://localhost:5173' // Adjust the origin to match your frontend port
   }));
 
-app.use(express.json())
+
 //routes
 app.use('/api/user',UserRouter)
 app.use('/api/auth/',authRouter)
+
 
 
 //error handling middleware

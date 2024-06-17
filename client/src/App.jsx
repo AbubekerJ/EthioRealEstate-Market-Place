@@ -6,6 +6,7 @@ import SignUp from './pages/SignUp.jsx'
 import About from './pages/About.jsx'
 import Profile from './pages/Profile.jsx'
 import Header from './componenets/Header.jsx'
+import PrivateRoute from './componenets/PrivateRoute.jsx'
 
 function App() {
   return <BrowserRouter>
@@ -16,7 +17,10 @@ function App() {
     <Route path='/SignIn' element = {<SignIn/>}/>
     <Route path='/SignUp' element = {<SignUp/>}/>
     <Route path='/About' element = {<About/>}/>
+    <Route element={<PrivateRoute/>}>
     <Route path='/Profile' element = {<Profile/>}/>
+    </Route>
+    
    
     
   </Routes>

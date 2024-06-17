@@ -3,5 +3,7 @@
 @tailwind utilities;
 
 body {
-    background:whitesmoke;
+    background-color: #1a202c; /* Dark background color */
+    font-family: 'Roboto', sans-serif; /* Optional: Adjust font family */
+    color: #e2e8f0; /* Text color for better contrast */
 }

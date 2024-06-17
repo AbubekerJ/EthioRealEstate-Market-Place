@@ -6,7 +6,7 @@ function Home() {
   return (
   
     <div>
-           {currentUser.username}
+    hello {currentUser?.username}
     </div>
   )
 }

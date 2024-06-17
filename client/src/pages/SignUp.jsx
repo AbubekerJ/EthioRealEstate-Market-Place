@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link ,useNavigate} from 'react-router-dom';
+import OAuth from '../componenets/OAuth';
 
 const SignUp = () => {
      const [form , setForm]=useState({})
@@ -13,7 +14,7 @@ const SignUp = () => {
         console.log(form)
      }
      
-     const handelSubmit = async (e)=>{
+     const handleSubmit = async (e)=>{
      e.preventDefault()
      
       try {
@@ -43,45 +44,49 @@ const SignUp = () => {
 
 
   return (
-    <div className='max-w-md mx-auto bg-white shadow-lg rounded-lg p-8 mt-12'>
-      <h1 className='font-semibold text-center text-4xl text-gray-800 mb-8'>Sign Up</h1>
-      
-      <form className='flex flex-col gap-6' onSubmit={handelSubmit}>
-        <input 
-          type="text" 
-          placeholder='Username' 
-          className='border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-800' 
-          id='username' 
-          onChange={handleChange}
-        />
-        <input 
-          type="email" 
-          placeholder='Email' 
-          className='border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-800' 
-          id='email'
-           onChange={handleChange} 
-        />
-        <input 
-          type="password" 
-          placeholder='Password' 
-          className='border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-800' 
-          id='password' 
-          onChange={handleChange}
-        />
-        <button disabled={loading}
-          className='border p-3 rounded-lg bg-gray-800 text-white uppercase hover:bg-gray-600 transition duration-300 ease-in-out' >
-          
-          {loading?'Loading....':'Sign Up'}
-         
-        </button>
-      </form>
-      <div className='flex mt-3 gap-1'>
-        <p>Have an Account?</p>
-        <Link to='/signIn'>
-            <span className='text-blue-800'>Sign In</span>
-        </Link>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 p-6">
+      <div className="bg-gray-800 shadow-lg rounded-lg p-8 w-full max-w-md">
+        <h1 className="font-semibold text-center text-4xl text-white mb-8">Sign Up</h1>
+        
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Username"
+            className="shadow appearance-none border border-gray-700 rounded w-full py-3 px-4 bg-gray-700 text-gray-300 leading-tight focus:outline-none focus:ring-2 focus:ring-gray-800"
+            id="username"
+            onChange={handleChange}
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            className="shadow appearance-none border border-gray-700 rounded w-full py-3 px-4 bg-gray-700 text-gray-300 leading-tight focus:outline-none focus:ring-2 focus:ring-gray-800"
+            id="email"
+            onChange={handleChange}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            className="shadow appearance-none border border-gray-700 rounded w-full py-3 px-4 bg-gray-700 text-gray-300 leading-tight focus:outline-none focus:ring-2 focus:ring-gray-800"
+            id="password"
+            onChange={handleChange}
+          />
+          <button
+            disabled={loading}
+            className="border p-3 rounded-lg bg-gray-800 text-white uppercase hover:bg-gray-600 transition duration-300 ease-in-out"
+          >
+            {loading ? 'Loading....' : 'Sign Up'}
+          </button>
+          <OAuth />
+        </form>
+        
+        <div className="flex mt-3 gap-1">
+          <p className="text-gray-300">Have an Account?</p>
+          <Link to="/signIn">
+            <span className="text-blue-500">Sign In</span>
+          </Link>
+        </div>
+        {error && <span className="text-sm text-red-600 mt-3">{error}</span>}
       </div>
-      {error&&<span className='text-sm text-red-600 mt-3' >{error}</span>}
     </div>
   );
 }
