@@ -141,10 +141,12 @@ const handleSubmit = async(e)=>{
     })
     const data = await res.json()
     if(data.success==='false'){
+      console.log(data)
       setSubmitError('Error Submiting the form '+data.messaage)
       setSubmitLoading(false)
     }
     setSubmitLoading(false)
+    console.log(data)
     setCreateSuccess('Listing Created Successfully')
     navigate('/listing/'+params.listingId)
     
