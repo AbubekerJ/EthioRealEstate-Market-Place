@@ -25,6 +25,7 @@ const SignIn = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(form),
+      credentials: 'include', 
     });
     const data = await res.json();
     console.log(data);

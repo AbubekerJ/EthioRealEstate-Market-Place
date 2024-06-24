@@ -21,7 +21,8 @@ function OAuth() {
                 headers:{
                     'Content-Type':'application/json'
                 },
-                body:JSON.stringify(Googleuser)
+                body:JSON.stringify(Googleuser),
+                credentials: 'include', 
             })
             const data = await res.json()
             if(data.success ==='false'){
