@@ -7,3 +7,35 @@ body {
     font-family: 'Roboto', sans-serif; /* Optional: Adjust font family */
     color: #e2e8f0; /* Text color for better contrast */
 }
+
+main {
+    background-color: #1a202c; /* Dark background for the entire main area */
+}
+
+.bg-gray-800 {
+    background-color: #2d3748; /* Slightly lighter dark background for containers */
+}
+
+.text-gray-100 {
+    color: #f7fafc; /* Light text color for readability */
+}
+
+.text-gray-300 {
+    color: #e2e8f0; /* Slightly lighter text color for descriptions */
+}
+
+.bg-red-700 {
+    background-color: #c53030; /* Red background for rent/sale tags */
+}
+
+.bg-green-700 {
+    background-color: #2f855a; /* Green background for discount tags */
+}
+
+.bg-gray-700 {
+    background-color: #4a5568; /* Darker background for buttons */
+}
+
+.hover\:bg-gray-600:hover {
+    background-color: #718096; /* Hover effect for buttons */
+}

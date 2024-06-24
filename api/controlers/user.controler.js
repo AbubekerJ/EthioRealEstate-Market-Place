@@ -43,3 +43,18 @@ export const deleteUser = async(req , res , next)=>{
 
 }
 
+
+export const getLandlord =async(req , res , next)=>{
+   try {
+
+    const landLord = await User.findById(req.params.id)
+    if(!landLord){
+     return next(customError(404 , 'land lord not found'))
+    }
+     res.status(200).json(landLord)
+     
+   } catch (error) {
+     next(error)
+   }
+
+} 
