@@ -6,6 +6,7 @@ import authRouter from './routes/auth.route.js'
 import listingRouter from './routes/listing.route.js'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
+import path from 'path';
 
 dotenv.config()
 
@@ -20,6 +21,9 @@ mongoose.connect(process.env.MONGODB_URI).then(()=>{
     console.log(error)
 })
 
+// path
+const __dirname = path.resolve();
+
 //middleware
 app.use(cors({
     origin: 'http://localhost:5173', // Adjust the origin to match your frontend port
@@ -32,7 +36,11 @@ app.use('/api/user',UserRouter)
 app.use('/api/auth/',authRouter)
 app.use('/api/listing/',listingRouter)
 
-
+// for the deploy 
+app.use(express.static(path.join(__dirname, '/client/dist')));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+  })
 
 //error handling middleware
 //note always make error middleware uneder all code 
