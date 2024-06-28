@@ -117,7 +117,7 @@ const handleSubmit = async(e)=>{
   if (formData.imageUrls.length<1) return setSubmitError('You need to upload atleast 1 image')
   try {
      setSubmitLoading(true)
-    const res = await fetch ('http://localhost:3000/api/listing/createlisting',{
+    const res = await fetch ('https://ethio-realestate.onrender.com/api/listing/createlisting',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify(formData)

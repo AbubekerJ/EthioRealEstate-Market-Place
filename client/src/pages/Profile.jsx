@@ -61,7 +61,7 @@ const handleFileSubmit = (file)=>{
     try {
       dispath(updateStart())
       e.preventDefault()
-      const res =await fetch(`http://localhost:3000/api/user/update/${currentUser._id}`, {
+      const res =await fetch(`https://ethio-realestate.onrender.com/api/user/update/${currentUser._id}`, {
         method :'POST' , 
         headers:{
           'Content-Type':'application/json'
@@ -89,7 +89,7 @@ const handleFileSubmit = (file)=>{
 const handleDeletUser = async()=>{
   try {
       dispath(deleteStart())
-    const res = await fetch('http://localhost:3000/api/user/delete/'+currentUser._id,{
+    const res = await fetch('https://ethio-realestate.onrender.com/api/user/delete/'+currentUser._id,{
       method:'DELETE', 
       headers:{'Content-Type':'application/json'},
      
@@ -108,7 +108,7 @@ const handleDeletUser = async()=>{
 const handleSignOut =async ()=>{
   try {
      dispath(signOutStart())
-    const res =await fetch('http://localhost:3000/api/auth/signout',{
+    const res =await fetch('https://ethio-realestate.onrender.com/api/auth/signout',{
       credentials: 'include', 
     })
     const data =  res.json()
@@ -128,7 +128,7 @@ const handleShowLiting = async () => {
   setListingLoading(true);
   setListingError(null);
   try {
-    const res = await fetch(`http://localhost:3000/api/listing/showListing/${currentUser._id}`, { credentials: 'include' });
+    const res = await fetch(`https://ethio-realestate.onrender.com/api/listing/showListing/${currentUser._id}`, { credentials: 'include' });
     const data = await res.json();
     console.log(data.success);
     if (data.success === false) {
@@ -149,7 +149,7 @@ const handleShowLiting = async () => {
 
   const handleDeleteListing = async(id)=>{
     try {
-      const res =await fetch(`http://localhost:3000/api/listing/deleteListing/${id}` ,{
+      const res =await fetch(`https://ethio-realestate.onrender.com/api/listing/deleteListing/${id}` ,{
         method: 'DELETE',  
         credentials: 'include', 
       })

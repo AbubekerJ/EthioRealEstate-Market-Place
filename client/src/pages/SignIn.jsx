@@ -20,7 +20,7 @@ const SignIn = () => {
     dispatch(signInStart());
     try {
        
-    const res = await fetch('http://localhost:3000/api/auth/signIn', {
+    const res = await fetch('https://ethio-realestate.onrender.com/api/auth/signIn', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

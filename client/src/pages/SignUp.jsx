@@ -19,7 +19,7 @@ const SignUp = () => {
      
       try {
         setLoading(true)
-        const res = await fetch('http://localhost:3000/api/auth/signUp',{
+        const res = await fetch('https://ethio-realestate.onrender.com/api/auth/signUp',{
           method :'POST',
           headers:{
            'Content-Type':'application/json'

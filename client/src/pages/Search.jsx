@@ -45,7 +45,7 @@ export default function Search() {
       const theQuery = urlParams.toString();
       setLoading(true)
       try {
-        const res = await fetch(`http://localhost:3000/api/listing/searchListing?${theQuery}`);
+        const res = await fetch(`https://ethio-realestate.onrender.com/api/listing/searchListing?${theQuery}`);
         const data = await res.json();
         if (data.success === false) {
           setError(data.message);

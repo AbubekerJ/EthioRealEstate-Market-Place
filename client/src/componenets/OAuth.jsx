@@ -18,7 +18,7 @@ function OAuth() {
             const result  =await signInWithPopup(auth , provider)
             console.log(result)
            const Googleuser = {username:result.user.displayName , email:result.user.email ,avatar:result.user.photoURL}
-            const res  = await fetch ('http://localhost:3000/api/auth/google',{
+            const res  = await fetch ('https://ethio-realestate.onrender.com/api/auth/google',{
                 method:'POST',
                 headers:{
                     'Content-Type':'application/json'

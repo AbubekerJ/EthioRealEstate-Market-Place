@@ -40,7 +40,7 @@ const CreateListing = () => {
   useEffect(()=>{
     const fetchData = async ()=>{
        try {
-         const res = await fetch(`http://localhost:3000/api/listing/getListing/${params.listingId}`)
+         const res = await fetch(`https://ethio-realestate.onrender.com/api/listing/getListing/${params.listingId}`)
          const data = await res.json()
         setFormData(data)
        } catch (error) {
@@ -131,7 +131,7 @@ const handleSubmit = async(e)=>{
   try {
      setSubmitLoading(true)
      console.log(params.listingId)
-    const res = await fetch (`http://localhost:3000/api/listing/updateListing/${params.listingId}`,{
+    const res = await fetch (`https://ethio-realestate.onrender.com/api/listing/updateListing/${params.listingId}`,{
      
       method:'POST',
       headers:{'Content-Type':'application/json'},
@@ -330,7 +330,7 @@ return (
             disabled={imageUploadLoadng}
             onClick={handleImageUpload}
             type='button'
-            className='p-3 text-white rounded-lg uppercase hover:shadow-lg bg-gradient-to-r from-green-400 to-blue-500'
+            className='p-3 text-white rounded-lg uppercase hover:shadow-lg bg-gradient-to-r from-amber-400 to-amber-900'
           >
             {imageUploadLoadng ? 'Uploading ...' : 'Upload'}
           </button>
@@ -352,9 +352,9 @@ return (
           ))}
         <button
           type='submit'
-          className='p-3 text-white rounded-lg uppercase hover:shadow-lg bg-gradient-to-r from-purple-400 via-pink-500 to-red-500'
+          className='p-3 text-white rounded-lg uppercase hover:shadow-lg bg-gradient-to-r from-amber-400 to-amber-900'
         >
-         {submitLoading?'Updating...':'Upadat Listing'} 
+         {submitLoading?'Updating...':'Update Listing'} 
         </button>
 
         <p className='text-red-500 text-sm text-center'>

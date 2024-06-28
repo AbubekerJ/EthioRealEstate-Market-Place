@@ -29,7 +29,7 @@ function Listing() {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`http://localhost:3000/api/listing/myListing/${params.listingId}`);
+        const res = await fetch(`https://ethio-realestate.onrender.com/api/listing/myListing/${params.listingId}`);
         const data = await res.json();
         if (data.success === 'false') {
           setLoading(false);
@@ -46,7 +46,7 @@ function Listing() {
     
     const fetchLandlord = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/api/user/getLandlord/${listing.userRef}`);
+        const res = await fetch(`https://ethio-realestate.onrender.com/api/user/getLandlord/${listing.userRef}`);
         const data = await res.json();
         if (data.success === 'false') {
           setLoading(false);
