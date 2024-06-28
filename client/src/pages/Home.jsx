@@ -16,7 +16,7 @@ export default function Home() {
   useEffect(() => {
     const fetchOfferListings = async () => {
       try {
-        const res = await fetch('http://localhost:3000/api/listing/searchListing?offer=true&limit=6');
+        const res = await fetch('https://ethio-realestate.onrender.com/api/listing/searchListing?offer=true&limit=6');
         const data = await res.json();
         setOfferListings(data);
         fetchRentListings();
@@ -27,7 +27,7 @@ export default function Home() {
     
     const fetchRentListings = async () => {
       try {
-        const res = await fetch('http://localhost:3000/api/listing/searchListing?type=rent&limit=6');
+        const res = await fetch('https://ethio-realestate.onrender.com/api/listing/searchListing?type=rent&limit=6');
         const data = await res.json();
         setRentListings(data);
         fetchSaleListings();
@@ -38,7 +38,7 @@ export default function Home() {
 
     const fetchSaleListings = async () => {
       try {
-        const res = await fetch('http://localhost:3000/api/listing/searchListing?type=sale&limit=6');
+        const res = await fetch('https://ethio-realestate.onrender.com/api/listing/searchListing?type=sale&limit=6');
         const data = await res.json();
         setSaleListings(data);
       } catch (error) {
