@@ -21,7 +21,7 @@ function About() {
             </p>
           </div>
           <div className="w-full lg:w-1/2">
-            <img src="https://via.placeholder.com/500" alt="EthioRealEstate" className="rounded-lg shadow-lg" />
+            <img src="https://unsplash.com/photos/white-bed-with-gray-and-white-bed-linen-nEtpvJjnPVo" alt="EthioRealEstate" className="rounded-lg shadow-lg" />
           </div>
         </div>
         <div className="mb-10">

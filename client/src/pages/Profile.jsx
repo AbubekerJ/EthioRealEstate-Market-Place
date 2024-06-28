@@ -182,7 +182,7 @@ const handleShowLiting = async () => {
             
             <img
               className="rounded-full h-32 w-32 object-cover cursor-pointer border-4 border-gray-800 shadow-md"
-              src={formData.avatar||currentUser.avatar}
+              src={formData.avatar||currentUser.avatar ||'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png'}
               alt="Profile"
               onClick={()=>fileRef.current.click()}
               
