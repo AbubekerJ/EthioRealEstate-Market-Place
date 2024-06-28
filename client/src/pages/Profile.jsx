@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useRef } from 'react';
 import { app } from '../firebase';
 import {getStorage , ref, uploadBytesResumable, getDownloadURL} from 'firebase/storage'
-import {updateFail , updateStart , updateSuccess, deleteFail , deleteStart , deleteSuccess , signOutFail , signOutStart ,signInSuccess} from '../redux/user/user.slice'
+import {updateFail , updateStart , updateSuccess, deleteFail , deleteStart , deleteSuccess , signOutFail , signOutStart  ,signOutSuccess} from '../redux/user/user.slice'
 import { useDispatch } from 'react-redux';
 import { useNavigate ,Link} from 'react-router-dom';
 
@@ -71,7 +71,7 @@ const handleFileSubmit = (file)=>{
         
       })
       const data = await res.json()
-      if (data.success ==='false'){
+      if (data.success==='false'){
        
         dispath(updateFail(data.message))
         return;
@@ -88,7 +88,7 @@ const handleFileSubmit = (file)=>{
 
 const handleDeletUser = async()=>{
   try {
-   
+      dispath(deleteStart())
     const res = await fetch('http://localhost:3000/api/user/delete/'+currentUser._id,{
       method:'DELETE', 
       headers:{'Content-Type':'application/json'},
@@ -107,7 +107,7 @@ const handleDeletUser = async()=>{
 }
 const handleSignOut =async ()=>{
   try {
-   
+     dispath(signOutStart())
     const res =await fetch('http://localhost:3000/api/auth/signout',{
       credentials: 'include', 
     })
@@ -118,7 +118,7 @@ const handleSignOut =async ()=>{
       return;
 
     }
-    dispath(signInSuccess())
+    dispath(signOutSuccess())
     
   } catch (error) {
     dispath(signOutFail(error.message))
@@ -131,7 +131,7 @@ const handleShowLiting = async () => {
     const res = await fetch(`http://localhost:3000/api/listing/showListing/${currentUser._id}`, { credentials: 'include' });
     const data = await res.json();
     console.log(data.success);
-    if (data.success === 'false') {
+    if (data.success === false) {
       console.log(data);
       setListingError(data.message);
        return;
@@ -168,7 +168,7 @@ const handleShowLiting = async () => {
   }
   
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gray-900 p-6">
+    <div className="min-h-screen flex flex-col items-center bg-gray-900 p-6 ">
       <div className="bg-gray-800 rounded-lg shadow-lg p-8 w-full max-w-2xl mt-10">
         <h1 className="font-bold text-center text-4xl text-white mb-6">Profile</h1>
         <form onSubmit={handleSubmit} className="flex flex-col items-center">
@@ -187,7 +187,7 @@ const handleShowLiting = async () => {
               onClick={()=>fileRef.current.click()}
               
             />
-            <button    className="absolute bottom-0 right-0 bg-blue-500 text-white rounded-full p-2 shadow-md hover:bg-blue-600">
+            <button    className="absolute bottom-0 right-0  bg-gradient-to-r from-amber-400 to-amber-900 text-white rounded-full p-2 shadow-md hover:bg-blue-600">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -205,9 +205,9 @@ const handleShowLiting = async () => {
             
             </button>
           </div>
-          {errorUpload?<span className='text-red-600'>Error while uploading</span>:
+          {errorUpload?<span className='text-red-400'>Image Should Be Less Than 2mb</span>:
           uploadProgress>0&&uploadProgress<100?<span >Uploading Image {uploadProgress} %</span>:
-          uploadProgress===100?<span className='text-green-600'>upload completed</span>:''
+          uploadProgress===100?<span className='text-green-400'>upload completed</span>:''
           }
           <div className="w-full mb-4">
             <label className="block text-gray-300 text-sm font-semibold mb-2" htmlFor="username">
@@ -250,10 +250,10 @@ const handleShowLiting = async () => {
               autoComplete="new-password" // Ensure to handle password field properly for security
             />
              <button 
-              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 w-full mt-2 uppercase  rounded ">
+              className=" bg-gray-700 hover:bg-gray-600 text-white font-bold py-4 w-full mt-2 uppercase  rounded ">
                 <span>{loading?'Updating...':'Update Information'}</span>
               </button>
-                <div className='   text-center  bg-amber-600 hover:bg-amber-500 text-white font-bold py-2 w-full mt-2 uppercase  rounded '>
+                <div className='   text-center  bg-gradient-to-r from-amber-400 to-amber-900 hover:bg-amber-500 text-white font-bold py-4 w-full mt-2 uppercase  rounded  '>
                 <Link  to={'/CreateListing'}>
                Create Listing
                  </Link>
@@ -279,6 +279,7 @@ const handleShowLiting = async () => {
           >
             Sign Out
           </button>
+
         </div>
         <div className='items-center justify-center text-center'>
           <button className='uppercase text-lg text-amber-100 hover:text-blue-200'onClick={handleShowLiting}>
@@ -286,7 +287,7 @@ const handleShowLiting = async () => {
           </button>
       
           <div className='flex flex-col items-center'>
-          <span className='text-red-700 text-sm'>{listingError&&listingError}</span> 
+          <span className='text-red-400 text-sm'>{listingError&&listingError}</span> 
            { showListing&& showListing.length>0 &&  showListing.map((listing) => (
             
             <div className='flex items-center justify-between gap-4 my-2 w-full max-w-md' key={listing._id}>

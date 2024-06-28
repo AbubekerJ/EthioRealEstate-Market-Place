@@ -29,6 +29,10 @@ const SignUp = () => {
           })
           const data= await res.json()
           console.log(data)
+          if (data.success === 'false') {
+            dispatch(signInFail(data.message));
+            return;
+          }
           setLoading(false)
           setError(null)
           

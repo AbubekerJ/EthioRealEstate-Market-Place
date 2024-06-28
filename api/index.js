@@ -6,14 +6,9 @@ import authRouter from './routes/auth.route.js'
 import listingRouter from './routes/listing.route.js'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
-import globalTunnel from 'global-tunnel-ng';
+
 dotenv.config()
-globalTunnel.initialize({
-    host: "192.168.49.1",
-    port:  8282,
-    protocol: "https:",
-    connect: "both",
-  });
+
 
 const app =express()
 app.use(express.json())

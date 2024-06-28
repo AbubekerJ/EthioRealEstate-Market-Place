@@ -17,8 +17,9 @@ const SignIn = () => {
 
   const handelSubmit = async (e) => {
     e.preventDefault();
-
     dispatch(signInStart());
+    try {
+       
     const res = await fetch('http://localhost:3000/api/auth/signIn', {
       method: 'POST',
       headers: {
@@ -29,12 +30,15 @@ const SignIn = () => {
     });
     const data = await res.json();
     console.log(data);
-    if (data.success === false) {
+    if (data.success === 'false') {
       dispatch(signInFail(data.message));
       return;
     }
     dispatch(signInSuccess(data));
     navigate('/');
+    } catch (error) {
+      dispatch(signInFail(error.message));
+    }
   };
 
   return (
@@ -59,8 +63,9 @@ const SignIn = () => {
           />
           <button
             disabled={loading}
-            className="border p-3 rounded-lg bg-blue-500 text-white uppercase hover:bg-blue-600 transition duration-300 ease-in-out"
-          >
+            className="border p-3 rounded-lg bg-gray-800 text-white uppercase hover:bg-gray-600 transition duration-300 ease-in-out"
+            >
+          
             {loading ? 'Loading....' : 'Sign In'}
           </button>
           <OAouth />

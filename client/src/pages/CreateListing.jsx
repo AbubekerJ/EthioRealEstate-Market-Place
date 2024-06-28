@@ -67,7 +67,10 @@ const CreateListing = () => {
     
        },
        (error)=>{
-        setImageUploadError('error Uploading image')},
+        setImageUploadError('Error Uploading image. Image Must be less than 2mb ')
+        setImageUploadLoading(false)
+      },
+        
        async()=>{ 
         const downloadURL = await getDownloadURL(UploadTask.snapshot.ref , )
         resolve(downloadURL)
@@ -109,6 +112,7 @@ const handleImageDelete =(deleteindex)=>{
 }
 
 const handleSubmit = async(e)=>{
+  setSubmitError(null)
   e.preventDefault();
   if (formData.imageUrls.length<1) return setSubmitError('You need to upload atleast 1 image')
   try {
@@ -139,7 +143,7 @@ const handleSubmit = async(e)=>{
 
 
 return (
-  <main className='p-3 max-w-4xl mx-auto bg-gray-800 rounded-lg shadow-lg m-10'>
+  <main className='p-3 max-w-4xl mx-auto rounded-lg shadow-lg m-10'>
     <h1 className='text-3xl font-semibold text-center my-7 text-gray-200'>
       Create a Listing
     </h1>
@@ -306,9 +310,9 @@ return (
             disabled={imageUploadLoadng}
             onClick={handleImageUpload}
             type='button'
-            className='p-3 text-white rounded-lg uppercase hover:shadow-lg bg-gradient-to-r from-green-400 to-blue-500'
+            className='p-3 text-white rounded-lg uppercase hover:shadow-lg bg-gradient-to-r from-amber-400 to-amber-900'
           >
-            {imageUploadLoadng ? 'Uploading ...' : 'Upload'}
+            {imageUploadLoadng ? 'Uploading...' : 'Upload'}
           </button>
         </div>
         <p className='text-red-500 text-sm'>
@@ -329,7 +333,7 @@ return (
         <button
           disabled={imageUploadLoadng}
           type='submit'
-          className='p-3 text-white rounded-lg uppercase hover:shadow-lg bg-gradient-to-r from-purple-400 via-pink-500 to-red-500'
+          className='p-3 text-white rounded-lg uppercase hover:shadow-lg  bg-gradient-to-r from-amber-400 to-amber-900'
         >
          {submitLoading?'Creating...':'Create Listing'} 
         </button>
