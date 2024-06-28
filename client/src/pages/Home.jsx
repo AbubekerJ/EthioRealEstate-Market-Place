@@ -116,7 +116,7 @@ export default function Home() {
   <div className="p-6">
     <div className="my-3 flex flex-col gap-2 items-center">
       <h2 className="text-3xl font-semibold text-amber-400">Recent places for Rent</h2>
-      <Link className="text-sm text-amber-400 hover:text-amber-600 transition duration-300" to="/search?type=sell">
+      <Link className="text-sm text-amber-400 hover:text-amber-600 transition duration-300" to="/search?type=rent">
         Show more places for Rent
       </Link>
     </div>
@@ -139,7 +139,7 @@ export default function Home() {
   <div className="p-6">
     <div className="my-3 flex flex-col gap-2 items-center">
       <h2 className="text-3xl font-semibold text-amber-400">Recent places for Sale</h2>
-      <Link className="text-sm text-amber-400 hover:text-amber-600 transition duration-300" to="/search?type=rent">
+      <Link className="text-sm text-amber-400 hover:text-amber-600 transition duration-300" to="/search?type=sell">
         Show more places for sale
       </Link>
     </div>
