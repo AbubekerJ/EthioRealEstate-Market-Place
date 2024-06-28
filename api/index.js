@@ -26,7 +26,7 @@ const __dirname = path.resolve();
 
 //middleware
 app.use(cors({
-    origin: 'http://localhost:5173', // Adjust the origin to match your frontend port
+    origin: ['http://localhost:5173' ,'https://ethio-realestate.onrender.com/'], // Adjust the origin to match your frontend port
     credentials: true 
   }));
 
