@@ -21,7 +21,7 @@ function About() {
             </p>
           </div>
           <div className="w-full lg:w-1/2">
-            <img src="https://unsplash.com/photos/white-bed-with-gray-and-white-bed-linen-nEtpvJjnPVo" alt="EthioRealEstate" className="rounded-lg shadow-lg" />
+            <img src="https://images.unsplash.com/photo-1502672023488-70e25813eb80" alt="EthioRealEstate" className="rounded-lg shadow-lg w-full h-auto" />
           </div>
         </div>
         <div className="mb-10">
@@ -32,7 +32,6 @@ function About() {
               <h3 className="text-xl font-semibold text-center text-amber-400">Abubeker</h3>
               <p className="text-gray-400 text-center">CEO</p>
             </div>
-           
           </div>
         </div>
         <div className="text-center">
